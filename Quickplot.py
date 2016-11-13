@@ -2,29 +2,30 @@ import matplotlib.pyplot as plt
 import sam
 import numpy as np
 
-def quickplot(values,colors,labels=None,filename=None,display=True,save=False,\
+def quickplot(values,colors=None,labels=None,filename=None,display=True,save=False,\
 						xLimits=None,yLimits=None,verticalMarkers = None, horizontalMarkers = None,\
-						xLabel = None,yLabel=None):
+						xLabel = None,yLabel=None,clearFig = False):
 	# ERROR CHECKING
-	if isinstance(values,(tuple,np.ndarray)) == False:
+	if isinstance(values,(tuple,list,np.ndarray)) == False:
 		print("\r\ninput 'values' must be a tuple or structured numpy array currently {0}\r\n".format(type(values)))
 		raise TypeError
-	if isinstance(colors,tuple) == False:
+	if isinstance(colors,(tuple,list,type(None))) == False:
 		print("\r\ninput 'colors' must be a tuple currently {0}\r\n".format(type(colors)))
 		raise TypeError
 	if isinstance(filename,(str,type(None))) == False:
 		print("\r\ninput 'filename' must be string or NoneType, currently{0}\r\n".format(type(filename)))
 		raise TypeError
-	if isinstance(labels,(tuple,type(None))) == False:
+	if isinstance(labels,(tuple,list,type(None))) == False:
 		print("\r\ninput 'labels' must be tuple or NoneType, currently{0}\r\n".format(type(labels)))
 		raise TypeError
-	if len(values) != len(colors):
-		print("\r\nvalues and colors must be a tuple of the same length\r\n")
-		raise ValueError
-	if isinstance(verticalMarkers,(tuple,type(None))) == False:
+	if isinstance(colors,(tuple,list)):
+		if len(values) != len(colors):
+			print("\r\nvalues and colors must be a tuple of the same length\r\n")
+			raise ValueError
+	if isinstance(verticalMarkers,(tuple,list,type(None))) == False:
 		print("\r\nverticalMarker must be of tuple or NoneType, currently{0}\r\n".format(type(verticalMarkers)))
 		raise TypeError
-	if isinstance(horizontalMarkers,(tuple,type(None))) == False:
+	if isinstance(horizontalMarkers,(tuple,list,type(None))) == False:
 		print("\r\nhorizontalMarker must be tuple or NoneType, currently{0}\r\n".format(type(horizontalMarkers)))
 		raise TypeError
 	if isinstance(xLabel,(type(None),str))==False:
@@ -39,7 +40,7 @@ def quickplot(values,colors,labels=None,filename=None,display=True,save=False,\
 		# if sArray == False:
 
 		if isinstance(labels,type(None)):
-			numberPlots = len(colors)
+			numberPlots = len(values)
 			labels = []
 
 			for plotNumber in range(numberPlots):
@@ -50,10 +51,12 @@ def quickplot(values,colors,labels=None,filename=None,display=True,save=False,\
 			print("\r\nthere must a label for every plot, or none at all\r\n")
 			raise ValueError
 
+
+
 		#iterating through the lists to return
 		plots = []
 		for index in range(len(values)):
-			color = colors[index]
+			color = colors[index] if colors != None else None
 			data = values[index]
 			label = labels[index]
 			if len(data) == 2:
@@ -95,7 +98,12 @@ def quickplot(values,colors,labels=None,filename=None,display=True,save=False,\
 		if display == True:
 			plt.show()
 
-		return plt
+		output = plt
+
+		if clearFig == True:
+			plt.clf()
+
+		return output
 
 	except Exception as e:
 		sam.debug(e)
