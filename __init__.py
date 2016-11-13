@@ -5,5 +5,5 @@ from Constants import *
 from .Opacity import opacity,bound_free_opacity,free_free_opacity,electron_scattering_opacity,H_ion_opacity
 from .Blackbody_fit import blackbody_fit
 from .Data_retrieval import retrieve_data,retrieve_structured_data,retrieve_non_structured_data
-from .Statistics import root_mean_squared2,rms2
+from .Statistics import rms2,rms
  

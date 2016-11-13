@@ -1,0 +1,4 @@
+need to add logging functionality (particularly to ease autodebugging)
+color logging (if possible)
+add error checking to all methods
+finish adding astronomical constants to Constants.py (there should be absolutely no hardcoded values in methods)
