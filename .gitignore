@@ -1,0 +1,7 @@
+#pycache directory
+__pycache__/
+output/
+data/
+
+#other fily types
+*.pyc
