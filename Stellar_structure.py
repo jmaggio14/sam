@@ -3,8 +3,8 @@ import sam
 
 def mass_gradient(r,rho,autoDebug=True):
 	"""
-	Mr/dr = rho(r) * 4 * pi * r^2
-	the mass contained within the given radius
+	dMr/dr = rho(r) * 4 * pi * r^2
+	the mass gradient within the given radius/radii
 	:inputs:
 		r [numpy.ndarray,float,int]
 			'--> radius, or set of radii to calculate
@@ -27,8 +27,8 @@ def mass_gradient(r,rho,autoDebug=True):
 
 def pressure_gradient(r,rho,Mr):
 	"""
-	Mr/dr = rho(r) * 4 * pi * r^2
-	the mass contained within the given radius
+	dPr/dr = (-G * Mr * rho(r) ) / (r^2)
+	the pressure gradient at the given radius/radii
 	:inputs:
 		r [numpy.ndarray,float,int]
 			'--> radius, or set of radii to calculate
@@ -54,6 +54,17 @@ def pressure_gradient(r,rho,Mr):
 
 
 def luminosity_gradient(r,rho,epsilon):
+	"""
+	dLr/dr = epsilon * rho(r) * 4 * pi * r^2
+	the luminosity gradient at the given radius/radii
+	:inputs:
+		r [numpy.ndarray,float,int]
+			'--> radius, or set of radii to calculate
+		rho [numpy.ndarray,float,int] 
+			'--> density, either an array of density by radius or an average
+		epsilson [float,int]
+			'--> the specific energy [J/kg] of the star
+	"""	
 	try:
 		#-------------BEGIN ERROR CHECKING----------------
 		if autoDebug:
