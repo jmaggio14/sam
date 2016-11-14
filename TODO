@@ -4,3 +4,5 @@ add error checking to all methods
 finish adding astronomical constants to Constants.py (there should be absolutely no hardcoded values in methods)
 test logging level modification
 check signs in stellar_structure.pressure_by_radius
+make Constants more consistent
+
