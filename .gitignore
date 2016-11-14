@@ -2,6 +2,10 @@
 __pycache__/
 output/
 data/
+model/__pycache__/
 
-#other fily types
+#other file types
 *.pyc
+*.pdf
+*.eps
+.nfs*
