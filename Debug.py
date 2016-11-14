@@ -25,6 +25,7 @@ def debug(exception):
 
 
 def type_check(var,types,varName):
+	types = tuple(types)
 	if isinstance(var,types) == False:
 		print("-----------------------------------------------------------")
 		print("                       TYPE ERROR                       \n")
@@ -109,7 +110,14 @@ def value_check(var,values,checkType,varName):
 			raise ValueError
 
 
-
+	elif checkType in ["equals","e","="]:
+		if var != values:
+			print("-----------------------------------------------------------")
+			print("                       VALUE ERROR                       \n")
+			print("'{0}' must be equal to {1}".format(varName,values))
+			print("\n                                                          ")
+			print("\n-----------------------------------------------------------")
+			raise ValueError			
 """
 ---------------------------------------------------------------------------------
            UNABLE TO EFFECTIVELY CREATE CUSTOM ERRORS --> come back later     
