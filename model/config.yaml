@@ -1,6 +1,0 @@
-#star attributes
-mass : 1.0
-mass_fractions:
-  X : .7
-  Y : .2
-  Z : .1

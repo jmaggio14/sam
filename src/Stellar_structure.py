@@ -81,7 +81,8 @@ def luminosity_gradient(r,rho,epsilon,autoDebug=True):
 
 
 def radiation_temperature_gradient(r,kappa,rho,Lr,T,autoDebug=True):
-	try:
+    pass
+#	try:
 		#-------------BEGIN ERROR CHECKING----------------
 		# if autoDebug:
 		# 	sam.type_check(r,[np.ndarray,int,float],'r')
@@ -89,4 +90,4 @@ def radiation_temperature_gradient(r,kappa,rho,Lr,T,autoDebug=True):
 		# 	sam.type_check(Lr,[np.ndarray,int,float],'Lr')
 		#-------------END ERROR CHECKING------------------
 		
-		temperatureGradient = (-3.0/4.0) * 
+		#temperatureGradient = (-3.0/4.0) ##UNFINISHED

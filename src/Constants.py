@@ -1,16 +1,21 @@
-import numpy
+import numpy as np
 import math    
 
 # Destination depths
-SAM_8U = numpy.uint8      # 8-bit unsigned int
-SAM_8S = numpy.int8       # 8-bit signed int
-SAM_16U = numpy.uint16    # 16-bit unsigned int
-SAM_16S = numpy.int16     # 16-bit signed int
-SAM_32S = numpy.int32     # 32-bit signed int
-SAM_32F = numpy.float32   # 32-bit float (single precision)
-SAM_64F = numpy.float64   # 64-bit float (double precision)
+SAM_8U = np.uint8      # 8-bit unsigned int
+SAM_8S = np.int8       # 8-bit signed int
+SAM_16U = np.uint16    # 16-bit unsigned int
+SAM_16S = np.int16     # 16-bit signed int
+SAM_32S = np.int32     # 32-bit signed int
+SAM_32F = np.float32   # 32-bit float (single precision)
+SAM_64F = np.float64   # 64-bit float (double precision)
 
-#### UNIVERSAL CONSTANTS ####
+#Standard type tables (for error checking)
+SAM_TYPES_math = (np.ndarray,int,float)
+SAM_TYPES_lists = (np.ndarray,list,tuple)
+SAM_TYPES_numbers = (int,float)
+
+####======= UNIVERSAL CONSTANTS ========####
 
 #pi
 SAM_pi = math.pi #pi
@@ -60,6 +65,3 @@ sam_me = SAM_electronMass
 #Rydberg Constant
 SAM_rydberg = 1.0973731568508e7
 SAM_R = SAM_rydberg
-
-
-

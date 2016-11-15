@@ -1,0 +1,14 @@
+#Kilograms
+mass : 1.0
+
+#fractions
+mass_fractions:
+  X : .7
+  Y : .28
+  Z : .02
+
+#Kelvin
+temperature: 5777
+
+#meters
+radius: 
