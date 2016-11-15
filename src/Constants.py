@@ -15,6 +15,7 @@ SAM_TYPES_math = (np.ndarray,int,float)
 SAM_TYPES_lists = (np.ndarray,list,tuple)
 SAM_TYPES_numbers = (int,float)
 
+
 ####======= UNIVERSAL CONSTANTS ========####
 
 #pi
