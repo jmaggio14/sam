@@ -7,3 +7,4 @@ check signs in stellar_structure.pressure_by_radius
 make Constants more consistent
 modify value_check '>','<','=' to support numpy arrays
 reorganize method/file structure (for instance put everything related to blackbodies in one file
+test and complete the Star class
