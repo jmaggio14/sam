@@ -12,8 +12,9 @@ class Star(sam.Config):
 
 		#Stellar temperature
 		self._temperature = configs["temperature"]
+
 		#Stellar Luminosity
-		self._luminosity = sam.
+		self._luminosity = sam.luminosity()
 
 		#Stellar Mass Fractions -- X:Hydrogen,Y:Helium,Z:Metals
 		self._massFractions = configs["mass_fractions"]

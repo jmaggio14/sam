@@ -22,4 +22,4 @@ def luminosity(r,T,autoDebug=True):
 
 	L = 4 * sam.SAM_pi * r**2 * sam.SAM_k * T**4
 	return L
-	
+
