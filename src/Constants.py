@@ -1,5 +1,14 @@
 import numpy as np
 import math    
+"""
+add:
+	light year <--> meter conversion
+	imperial <--> metric  conversions
+
+"""
+
+
+###=========== TYPES ==============##
 
 # Destination depths
 SAM_8U = np.uint8      # 8-bit unsigned int
@@ -14,6 +23,34 @@ SAM_64F = np.float64   # 64-bit float (double precision)
 SAM_TYPES_math = (np.ndarray,int,float)
 SAM_TYPES_lists = (np.ndarray,list,tuple)
 SAM_TYPES_numbers = (int,float)
+
+
+
+######======= SOLAR ATTRIBUTES ======####
+
+#solar mass
+SAM_solarMass = 1.9891e30
+SAM_M_ = SAM_solarMass
+
+#solar luminosity
+SAM_solarLuminosity = 3.839e26
+SAM_L_ = SAM_solarLuminosity
+
+#solar radius
+SAM_solarRadius = 6.955e8
+SAM_R_ = SAM_solarRadius
+
+#solar effective surface temperature
+SAM_solarTemperature = 5777
+SAM_T_ = SAM_solarTemperature
+
+
+
+######============= CONVERSIONS =======####
+SAM_pc_to_m = 3.0856776e16
+SAM_m_to_pc = (1.0 / SAM_pc_to_m)
+
+
 
 
 ####======= UNIVERSAL CONSTANTS ========####
@@ -34,8 +71,8 @@ SAM_h = SAM_planck
 SAM_hbar = 1.054571800e-34
 
 #planck Length
-SAM_l = 1.616199e-35
-SAM_planckLength = SAM_l
+SAM_planckLength = 1.616199e-35
+SAM_l = SAM_planckLength
 
 #Gravitational Constant (Newton's Constant)
 SAM_G = 6.67408e-11
@@ -59,10 +96,18 @@ SAM_electronCrossSection = 6.65e-29
 SAM_protonMass = 1.672621898e-27
 SAM_mp = SAM_protonMass
 
+#Hydrogren mass
+SAM_hydrogrenMass = 1.673532499e-27
+SAM_mh = SAM_hydrogrenMass
+
 #Election Mass
 SAM_electronMass = 9.10936356e-31
-sam_me = SAM_electronMass
+SAM_me = SAM_electronMass
 
 #Rydberg Constant
 SAM_rydberg = 1.0973731568508e7
 SAM_R = SAM_rydberg
+
+#Radiation Constant
+SAM_radationConstant = 4.0 * SAM_stefanBoltzmann / SAM_c
+SAM_a = SAM_radationConstant
