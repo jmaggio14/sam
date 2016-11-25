@@ -1,5 +1,4 @@
 import numpy as np
-import math    
 """
 add:
 	light year <--> meter conversion
@@ -30,19 +29,19 @@ SAM_TYPES_numbers = (int,float)
 
 #solar mass
 SAM_solarMass = 1.9891e30
-SAM_M_ = SAM_solarMass
+SAM_Ms = SAM_solarMass
 
 #solar luminosity
 SAM_solarLuminosity = 3.839e26
-SAM_L_ = SAM_solarLuminosity
+SAM_Ls = SAM_solarLuminosity
 
 #solar radius
 SAM_solarRadius = 6.955e8
-SAM_R_ = SAM_solarRadius
+SAM_Rs = SAM_solarRadius
 
 #solar effective surface temperature
 SAM_solarTemperature = 5777
-SAM_T_ = SAM_solarTemperature
+SAM_Ts = SAM_solarTemperature
 
 
 
@@ -52,14 +51,13 @@ SAM_m_to_pc = (1.0 / SAM_pc_to_m)
 
 
 
-
 ####======= UNIVERSAL CONSTANTS ========####
 
 #pi
-SAM_pi = math.pi #pi
+SAM_pi = np.pi #pi
 
 #e
-SAM_e = math.e
+SAM_e = np.e
 
 #Boltzman's constant
 SAM_boltzmann = 1.38064852e-23
@@ -111,3 +109,10 @@ SAM_R = SAM_rydberg
 #Radiation Constant
 SAM_radationConstant = 4.0 * SAM_stefanBoltzmann / SAM_c
 SAM_a = SAM_radationConstant
+
+#specific energies for CNO cycle and PP chain
+SAM_ppConstant = 1.08e-12
+SAM_cnoConstant = 8.24e-31
+
+
+
