@@ -1,6 +1,5 @@
-import System
-configs = System.parse_input()
 import sam
+configs = sam.System.Config()._configs
 
 #Configs are configuration settings from config.yaml
 #sam is the entire module
