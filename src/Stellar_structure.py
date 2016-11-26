@@ -1,5 +1,5 @@
-import numpy as np
 import sam
+import numpy as np
 
 def mass_gradient(r,rho,autoDebug=True):
 	"""
@@ -91,3 +91,53 @@ def radiation_temperature_gradient(r,kappa,rho,Lr,T,autoDebug=True):
 		#-------------END ERROR CHECKING------------------
 		
 		#temperatureGradient = (-3.0/4.0) ##UNFINISHED
+
+
+
+
+###NON TRADITIONAL STELLAR STRUCTURE EQUATIONS
+def internal_mass(r,rho,autoDebug=True):
+	"""
+	calculates internal mass of star
+
+	Volume of circle * density 
+
+	currently only works with 
+	"""
+	mass = 4.0/3.0 * sam.SAM_pi * r**3 * rho
+	return mass
+
+
+def specific_energy_pp(X,rho,T,fpp=1.0,psi=1.0,cpp=1.0):
+	"""
+	calculates specific energy for the proton-proton chain
+
+	:inputs:
+		X [float]
+			'--> the mass fraction of hydrogen
+		rho [float,int]
+			'--> pressure of star (generally average pressure)
+		T [float,int]
+			'--> temperature of reasction (generally an average)
+			'--> NOT T_6 (not T/1e6 as is usually used hand written equations)
+		fpp [float,int]
+			'--> PP chain screening factor (generally 1)
+		psi [float,int]
+			'--> PP correction factor (generally 1)
+		cpp [float,int]
+			'--> higher order correction term (generally 1)
+	"""
+	#separates these for sake of computational efficiency
+	## ie don't bother multiplying by 1 when you don't have to
+	if (fpp == 1.0) and (psi == 1.0) and (cpp == 1.0):
+		epsilon = sam.SAM_ppConstant * rho * X**2 * (T/1e6)**4
+
+	else:	
+		epsilon = sam.SAM_ppConstant * rho * X**2 * fpp * psi * cpp * (T/1e6)**4
+
+	return epsilon
+
+
+def specific_energy_cno():
+
+
