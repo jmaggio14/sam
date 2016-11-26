@@ -1,7 +1,7 @@
 
 import numpy as np
 import sys
-import os.path
+import os
 
 def debug(exception):
 	"""
@@ -121,6 +121,11 @@ def value_check(var,values,checkType,varName="var"):
 			print("\n                                                          ")
 			print("\n-----------------------------------------------------------")
 			raise ValueError			
+
+	def path_check(path):
+		if os.path.exists(path) == False:
+			print("file path '{0}' does not exist".format(path))
+			sys.exit()
 """
 ---------------------------------------------------------------------------------
            UNABLE TO EFFECTIVELY CREATE CUSTOM ERRORS --> come back later     
