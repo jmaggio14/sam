@@ -10,7 +10,8 @@ class Config(object):
 	def __init__(self):
 		self._path = None
 		self._verified = False
-		self._configs = self.parse_input()           
+		self._configs = self.parse_input()
+		self.validateConfigs()        
     
 	def load_config(self):
 		if self._verified:
@@ -76,6 +77,46 @@ class Config(object):
 				print("logging input not interpretable")
 
 		return configs
+
+
+		def validate_configs(self):
+			"""
+			thoroughly hardcoded method used to validate the config inputs
+			"""
+
+			#mass
+			mass = self._configs["mass"]
+			sam.type_check(mass,sam.SAM_TYPES_numbers,'mass')
+			sam.value_check(mass,.0,'>','mass')
+			
+			#mass-fractions
+			mF = self._configs["mass_fractions"]
+			X = mF["X"]
+			sam.type_check(X,float,'Config: X')
+			sam.value_check(X,.0,'>','Config: X')
+			Y = mF["Y"]
+			sam.type_check(Y,float,'Config: Y')
+			sam.value_check(Y,.0,'>','Config: Y')
+			Z = mF["Z"]
+			sam.type_check(Z,float,'Config: Z')
+			sam.value_check(Z,.0,'>','Config: Z')
+
+			#effective_temperature
+			temp = self._configs["effective_temperature"]
+			sam.type_check(temp,sam.SAM_TYPES_numbers,'Config: effective_temperature')
+			sam.value_check(temp,.0,'>','Config: effective_temperature')
+
+			#radii filename
+			rFilename = self._configs["radii_filename"]
+			sam.type_check(rFilename,str,'Config: radii_filename')
+			sam.path_check(rFilename)
+
+			#average pressure
+			rho = self._configs["average_pressure"]
+			sam.type_check(rho,sam.SAM_TYPES_numbers,'Config: average_pressure')
+			sam.value_check(rho,.0,'>','Config: average_pressure')
+
+
 
 if __name__ == "__main__":
 	configs = Config()._configs
