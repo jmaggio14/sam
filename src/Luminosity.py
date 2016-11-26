@@ -7,7 +7,7 @@ def luminosity(r,T,autoDebug=True):
 	Stefan-Boltzmann law
 
 	:inputs:
-		r [np.ndarray,int,float] -- radius or radii of stars
+		r [np.ndarray,int,float] -- radius or radii of star
 		T [np.ndarray,int,float] -- effective temperature or effective temperatures
 	:returns:
 		L [np.ndarray,float] -- effective luminosity or luminosities 
@@ -22,4 +22,3 @@ def luminosity(r,T,autoDebug=True):
 
 	L = 4 * sam.SAM_pi * r**2 * sam.SAM_k * T**4
 	return L
-
