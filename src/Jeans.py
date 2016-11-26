@@ -18,6 +18,7 @@ def jeans_mass(u,T,rho):
 	return Mj
 
 def jeans_mass2(u,T,n):
+	pass
 	"""
 	calculates the jean's mass of an ISM cloud, uses 
 	Mj = ( (375 k^3) / (4 * pi * (µ*mH)^4 * G^3) )
