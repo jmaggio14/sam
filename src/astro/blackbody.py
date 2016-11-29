@@ -72,6 +72,46 @@ def wiens_temp(peak):
 	temp = (2897.7729) / peak
 	return temp
 
+def blackbody_fit(wavelengths,emissivity,tempRange=(100,6500),step=5,rtype="dict",autoDebug=True):
+	#Error Checking
+	if autoDebug == True:
+		sam.type_check(wavelengths,np.ndarray,'wavelengths')
+		sam.type_check(emissivity,np.ndarray,'emissivity')
+		sam.value_check(emissivity.shape,(wavelengths.shape,),'discrete','emissivity')
+		sam.type_check(tempRange, (tuple,list,np.ndarray),'tempRange')
+		sam.value_check( len(tempRange), (1), 'f', "tempRange")
+		sam.type_check(step, (float,int), 'step')
+		if len(tempRange) <= 2:
+			sam.value_check(step,(tempRange[-1]-tempRange[0])/2,'g',"tempRange")
+		sam.type_check(rtype,str,'rtype')
+		sam.value_check(rtype, [0,"tuple","t","list",1,"dict","dictionary","d"], "d", "rtype")
+
+
+	try:
+		#Checking for normalization
+		if np.max(emissivity) > 1.0:
+			emissivity = emissivity / np.max(emissivity)
+		if len(tempRange) == 2:
+			tempRange = range(tempRange[0],tempRange[1],step)
+
+		RMS = np.zeros(len(tempRange))
+		for index,temp in enumerate(tempRange):
+			bb = sam.blackbody(T=temp, ranges=wavelengths, normalize=True)
+			rms = sam.rms2(bb,emissivity)
+			RMS[index] = rms
+
+		bestFitTemp= tempRange[ np.argmin(RMS) ]
+		bestBlackbody = sam.blackbody(T=bestFitTemp,ranges=wavelengths)
+
+
+		if rtype in [0,"tuple","t","list"]:
+			return wavelengths, emissivity, bestBlackbody, np.asarray(RMS), bestFitTemp
+		if rtype in [1,"dict","dictionary","d"]:
+			return {"wavelengths":wavelengths,"emissivity":emissivity,"bestBlackbody":bestBlackbody, "rms":np.asarray(RMS),"bestFitTemp":bestFitTemp}
+
+
+	except Exception as e:
+		sam.debug(e)
 
 
 def blackbody_errorcheck(T, ranges, step, verbose, filename):

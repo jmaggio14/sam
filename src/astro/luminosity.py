@@ -17,7 +17,7 @@ def luminosity(r,T,autoDebug=True):
 		sam.type_check(r, sam.SAM_TYPES_math, "r")
 		sam.type_check(T, SAM_TYPES_math, "T")
 		sam.value_check(r,.0,">","r")
-		sam.value_check(T,.0.,">","T")
+		sam.value_check(T,.0,">","T")
 	#-----------END ERROR CHECKING----------
 
 	L = 4 * sam.SAM_pi * r**2 * sam.SAM_k * T**4

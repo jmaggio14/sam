@@ -122,10 +122,10 @@ def value_check(var,values,checkType,varName="var"):
 			print("\n-----------------------------------------------------------")
 			raise ValueError			
 
-	def path_check(path):
-		if os.path.exists(path) == False:
-			print("file path '{0}' does not exist".format(path))
-			sys.exit()
+def path_check(path):
+	if os.path.exists(path) == False:
+		print("file path '{0}' does not exist".format(path))
+		sys.exit()
 """
 ---------------------------------------------------------------------------------
            UNABLE TO EFFECTIVELY CREATE CUSTOM ERRORS --> come back later     

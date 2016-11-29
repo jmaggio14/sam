@@ -139,5 +139,5 @@ def specific_energy_pp(X,rho,T,fpp=1.0,psi=1.0,cpp=1.0):
 
 
 def specific_energy_cno():
-
-
+	r = np.arrange(1000,.1)
+	# rho = 
