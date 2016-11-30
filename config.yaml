@@ -1,5 +1,5 @@
 # Kilograms
-mass : 1.0
+mass : 1.9891e+30
 
 # fractions (out of 1)
 mass_fractions:
@@ -8,10 +8,13 @@ mass_fractions:
   Z : .02
 
 #Kelvin
-effective_temperature: 5777
+effective_temperature: 5777.
 
-# Kilograms
-average_pressure: 1410
+# Kilograms / meter^3
+calculate_pressue: true
+average_pressure: 1410.
 
 # Meters
-radii_filename: "data/radii"
+radius:
+  step:  1.0e+3
+  total: 7.0e+8
