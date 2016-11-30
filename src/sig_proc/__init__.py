@@ -1,6 +1,6 @@
 #Methods
-from quickplot import quickplot
-from statistics import  rms, \
+from .quickplot import quickplot
+from .statistics import  rms, \
 						rms2, \
 						noise_rms, \
 						snr

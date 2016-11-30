@@ -1,1 +1,1 @@
-from . import astro
+from . import *
