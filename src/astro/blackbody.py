@@ -37,10 +37,10 @@ def blackbody(T=5800, ranges=(0.35,2.5), step=.005, normalize=True,
 	else:
 		wavelengths = np.arange(ranges[0],ranges[1],step)
 
-	h = sam.SAM_h
-	c = sam.SAM_c
-	k = sam.SAM_k
-	e = sam.SAM_e
+	h = sam.CONSTANT_h
+	c = sam.CONSTANT_c
+	k = sam.CONSTANT_k
+	e = sam.CONSTANT_e
 	calcWavelengths = wavelengths * 1e-6
 	radiances = (2*h*c**2) / ( ((calcWavelengths)**5) * (e**((h*c) / ( (calcWavelengths)*k*T)) ))
 
