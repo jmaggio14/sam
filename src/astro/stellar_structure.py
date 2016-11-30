@@ -15,11 +15,11 @@ def mass_gradient(r,rho,autoDebug=True):
 
 		#-------------BEGIN ERROR CHECKING----------------
 		if autoDebug:
-			sam.type_check(r,[np.ndarray,int,float],'r')
-			sam.type_check(rho,[np.ndarray,int,float],'rho')
+			sam.type_check(r,sam.TYPES_math,'r')
+			sam.type_check(rho,sam.TYPES_math,'rho')
 		#-------------END ERROR CHECKING------------------
 
-		massGradient = 4.0 * sam.SAM_pi * r**2 * rho
+		massGradient = 4.0 * sam.CONSTANT_pi * r**2.0 * rho
 		return massGradient
 
 	except Exception as e:
@@ -40,13 +40,13 @@ def pressure_gradient(r,rho,Mr,autoDebug=True):
 	try:
 		#-------------BEGIN ERROR CHECKING----------------
 		if autoDebug:
-			sam.type_check(r,[np.ndarray,int,float],'r')
-			sam.type_check(rho,[np.ndarray,int,float],'rho')
-			sam.type_check(Mr,[np.ndarray,int,float],'Mr')
+			sam.type_check(r,sam.TYPES_math,'r')
+			sam.type_check(rho,sam.TYPES_math,'rho')
+			sam.type_check(Mr,sam.TYPES_math,'Mr')
 		#-------------END ERROR CHECKING------------------
 
 		"""NEED TO CHECK SIGNS HERE!"""
-		presureGradient = (-1.0 * sam.SAM_G * Mr * rho) / (r**2)
+		presureGradient = (-1.0 * sam.CONSTANT_G * Mr * rho) / (r**2)
 		return presureGradient
 
 	except Exception as e:
@@ -68,12 +68,12 @@ def luminosity_gradient(r,rho,epsilon,autoDebug=True):
 	try:
 		#-------------BEGIN ERROR CHECKING----------------
 		if autoDebug:
-			sam.type_check(r,[np.ndarray,int,float],'r')
-			sam.type_check(rho,[np.ndarray,int,float],'rho')
-			sam.type_check(epsilon,[int,float],'epsilon')
+			sam.type_check(r,sam.TYPES_math,'r')
+			sam.type_check(rho,sam.TYPES_math,'rho')
+			sam.type_check(epsilon,sam.TYPES_numbers,'epsilon')
 		#-------------END ERROR CHECKING------------------
 
-		luminosityGradient = epsilon * rho * 4.0 * sam.SAM_pi * r**2
+		luminosityGradient = epsilon * rho * 4.0 * sam.CONSTANT_pi * r**2
 		return luminosityGradient
 
 	except Exception as e:
@@ -85,9 +85,9 @@ def radiation_temperature_gradient(r,kappa,rho,Lr,T,autoDebug=True):
 #	try:
 		#-------------BEGIN ERROR CHECKING----------------
 		# if autoDebug:
-		# 	sam.type_check(r,[np.ndarray,int,float],'r')
-		# 	sam.type_check(conductivity,[np.ndarray,int,float],'conductivity')
-		# 	sam.type_check(Lr,[np.ndarray,int,float],'Lr')
+		# 	sam.type_check(r,sam.TYPES_math,'r')
+		# 	sam.type_check(conductivity,sam.TYPES_math,'conductivity')
+		# 	sam.type_check(Lr,sam.TYPES_math,'Lr')
 		#-------------END ERROR CHECKING------------------
 		
 		#temperatureGradient = (-3.0/4.0) ##UNFINISHED
@@ -104,7 +104,7 @@ def internal_mass(r,rho,autoDebug=True):
 
 	currently only works with 
 	"""
-	mass = 4.0/3.0 * sam.SAM_pi * r**3 * rho
+	mass = (4.0 / 3.0) * sam.CONSTANT_pi * r**3.0 * rho
 	return mass
 
 
@@ -130,14 +130,51 @@ def specific_energy_pp(X,rho,T,fpp=1.0,psi=1.0,cpp=1.0):
 	#separates these for sake of computational efficiency
 	## ie don't bother multiplying by 1 when you don't have to
 	if (fpp == 1.0) and (psi == 1.0) and (cpp == 1.0):
-		epsilon = sam.SAM_ppConstant * rho * X**2 * (T/1e6)**4
+		epsilon = sam.CONSTANT_ppConstant * rho * X**2 * (T/1.0e6)**4
 
 	else:	
-		epsilon = sam.SAM_ppConstant * rho * X**2 * fpp * psi * cpp * (T/1e6)**4
+		epsilon = sam.CONSTANT_ppConstant * rho * X**2 * fpp * psi * cpp * (T/1.0e6)**4
 
 	return epsilon
 
 
-def specific_energy_cno():
-	r = np.arrange(1000,.1)
-	# rho = 
+def specific_energy_cno(X,Xcno,rho,T):
+	"""
+	calculates specific energy for the proton-proton chain
+
+	:inputs:
+		X [float]
+			'--> the mass fraction of hydrogen
+		Xcno [float,int]
+			'--> pressure of star (generally average pressure)
+		T [float,int]
+			'--> temperature of reasction (generally an average)
+			'--> NOT T_6 (not T/1e6 as is usually used hand written equations)
+		fpp [float,int]
+			'--> PP chain screening factor (generally 1)
+		psi [float,int]
+			'--> PP correction factor (generally 1)
+		cpp [float,int]
+			'--> higher order correction term (generally 1)
+	"""
+	#separates these for sake of computational efficiency
+	## ie don't bother multiplying by 1 when you don't have to
+	epsilon = sam.CONSTANT_cnoConstant * rho * X * Xcno * (T / 1.0e6)**19.9
+	return epsilon
+
+
+if __name__ == "__main__":
+	r = np.arange(0,7e+8,1.0e5)
+	rho = 1410.0
+	massGrad = mass_gradient(r,rho,autoDebug=False)
+	internalMassTest = np.cumsum(massGrad * 1.0e5).reshape( (1,massGrad.size) )
+	internalMass = internal_mass(r,rho).reshape( (1,massGrad.size) )
+	np.savetxt("a.txt",internalMass)
+	np.savetxt("b.txt",internalMassTest)
+
+	both = np.concatenate( (internalMassTest, internalMass), axis=1 )
+	sub = internalMassTest - internalMass
+	np.savetxt("sub.txt",sub)
+	# print(internalMass,internalMassTest)
+	# both = internalMassTest - internalMass
+	np.savetxt("test.txt",both)
