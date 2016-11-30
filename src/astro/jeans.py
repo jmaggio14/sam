@@ -12,8 +12,8 @@ def jeans_mass(u,T,rho):
 
 	WIP -- needs auto-error checking
 	"""
-	firstTerm = ( (5 * sam.SAM_k * T) / (sam.SAM_G * u * sam.SAM_mh) )**1.5
-	secondTerm =  (3 / (4 * sam.SAM_pi * rho) )**.5 
+	firstTerm = ( (5 * sam.CONSTANT_k * T) / (sam.CONSTANT_G * u * sam.CONSTANT_mh) )**1.5
+	secondTerm =  (3 / (4 * sam.CONSTANT_pi * rho) )**.5 
 	Mj = firstTerm * secondTerm
 	return Mj
 
