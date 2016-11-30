@@ -1,5 +1,6 @@
 import numpy as np
-import os
+import sam
+import sam.astro as sat
 
 class Star(object):
 	"""
@@ -12,33 +13,56 @@ class Star(object):
 
 
 	def __init__(self,configs):
-		#Retrieving values from files [arrays]
-		self._radii = sam.retrieve_non_structured_data(self._configs.radii_filename)
-		self._totalRadius = self._radii[-1]
-
 		#Raw Configuration Values
 		self._configs = configs
-		## All single values
-		self._mass = self.configs["mass"]
-		self._effectiveTemperature = self.configs["effective_temperature"]
-		###ADD L(r) and separate totalLuminosity variable
-		self._luminosity = sam.luminosity(self._totalRadius,self._effectiveTemperature)
+		self.assign_base_attributes()
+		self.calculate_attributes()
+		self.calculate_structure()
 
+
+
+	def assign_base_values(self):
+		#mass
+		self._mass = self.configs["mass"]
+		#radius
+		self._totalRadius = self._configs["radius"]["total"]
+		#effective bb temperature
+		self._effectiveTemperature = self._configs["effective_temperature"]
+		#mass fractions
 		self._X = self._configs["massFractions"]["X"]
 		self._Y = self._configs["massFractions"]["Y"]
 		self._Z = self._configs["massFractions"]["Z"]
-		self._averagePressure = self._configs["average_pressure"]
 
+	def calculate_attributes(self):
+		#luminosity
+		self._luminosity = sat.luminosity(self._totalRadius,self._effectiveTemperature)
+		#pressure
+		if self._configs["calculate_pressure"] == True:
+			vol = 4.0/3.0 * sam.CONSTANT_pi * self._totalRadius**3
+			self._pressure = self._mass / vol
+		else:	
+			self._pressure = self._configs["average_pressure"]
+		#internal mass
+		specificEnergyPP = sat.specific_energy_pp(self._X,self._pressure)
+		specificEnergyCNO = sat.specific_energy_cno(self.)
+		self._specificEnergy = specificEnergyPP + specificEnergyCNO
+		
+		#######---------  ADD SPECIFIC ENERGY CNO  ----------
+		self._radiusStep = self._configs["radius"]["step"]
+		self._radii = np.arange( 0.0, self._totalRadius, integrationDistance )
 
-		# preparing to calculate stellar structure
-		self._internalMass = sam.internal_mass(self._radii,self._averagePressure)
-		self._specificEnergyPP = sam.specific_energy_pp(self._X,self._averagePressure)
-
-
-		#Calculating Stellar Structure
-		self._massGradient = sam.mass_gradient(self._radii,self._averagePressure)
-
-
-
-
-
+	def calculate_structure(self):
+		r = self._radii
+		rho = self._pressure
+		#mass gradient
+		self._massGradient = sat.mass_gradient(r,rho)
+		#pressure gradient
+		self._internalMass = np.cumsum(self._massGradient * self._radiusStep)
+		self._pressureGradient = sat.pressure_gradient(r,rho,self._internalMass)
+		#luminosity gradient
+		self._luminosityGradient = sat.luminosity_gradient(r,rho,self._specificEnergy)
+		#temperature gradient
+		internalLuminosity = 
+		radTempGradient = 
+		adiabaticTempGradient = 
+		
