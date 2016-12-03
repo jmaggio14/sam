@@ -25,7 +25,7 @@ def debug(exception):
 
 
 def type_check(var,types,varName="var"):
-	types = tuple(types)
+        types = tuple(types) if isinstance(types,list) else types
 	if isinstance(var,types) == False:
 		print("-----------------------------------------------------------")
 		print("                       TYPE ERROR                       \n")
