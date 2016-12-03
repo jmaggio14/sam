@@ -145,7 +145,10 @@ CONSTANT_R = CONSTANT_rydberg
 CONSTANT_radationConstant = 4.0 * CONSTANT_stefanBoltzmann / CONSTANT_c
 CONSTANT_a = CONSTANT_radationConstant
 
-#specific energies for CNO cycle and PP chain
+#specific energies for CNO cycle and PP chain {J/kg}
 CONSTANT_ppConstant = 1.08e-12
 CONSTANT_cnoConstant = 8.24e-31
 
+#Univeral gas constant {J * mol^-2 K^-1}
+CONSTANT_gasConstant = 8.214472
+CONSTANT_Rg = CONSTANT_gasConstant

@@ -7,14 +7,15 @@ mass_fractions:
   Y : .28
   Z : .02
 
-#Kelvin
-effective_temperature: 5777.
-
 # Kilograms / meter^3
-calculate_pressue: true
+calculate_pressure: true
 average_pressure: 1410.
 
 # Meters
 radius:
-  step:  1.0e+3
+  dr:  1.0e+3
   total: 7.0e+8
+
+# check units of opacity
+opacity:
+  filename: "~/Modules/data/opacity.csv"

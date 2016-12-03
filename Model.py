@@ -1,6 +1,6 @@
 import sam
-configs = sam.System.Config()._configs
+configs = sam.Config()._configs
 
-myStar = sam.Star(configs)
+myStar = sam.astro.Star(configs)
 #Configs are configuration settings from config.yaml
 #sam is the entire module

@@ -7,7 +7,9 @@ from .stellar_structure import  mass_gradient,\
 								radiation_temperature_gradient,\
 								internal_mass,\
 								specific_energy_pp,\
-								specific_energy_cno
+								specific_energy_cno,\
+								adiabatic_temperature_gradient
+
 
 
 from .jeans import jeans_mass, jeans_mass2
