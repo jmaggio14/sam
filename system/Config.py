@@ -4,6 +4,8 @@ import logging
 import yaml
 import os
 import glob
+import sam
+
 
 class Config(object):
 
@@ -11,7 +13,7 @@ class Config(object):
 		self._path = None
 		self._verified = False
 		self._configs = self.parse_input()
-		self.validateConfigs()        
+		self.validate_configs()        
     
 	def load_config(self):
 		if self._verified:
@@ -79,42 +81,42 @@ class Config(object):
 		return configs
 
 
-		def validate_configs(self):
-			"""
-			thoroughly hardcoded method used to validate the config inputs
-			"""
+	def validate_configs(self):
+		"""
+		thoroughly hardcoded method used to validate the config inputs
+		"""
 
-			#mass
-			mass = self._configs["mass"]
-			sam.type_check(mass,sam.SAM_TYPES_numbers,'mass')
-			sam.value_check(mass,.0,'>','mass')
-			
-			#mass-fractions
-			mF = self._configs["mass_fractions"]
-			X = mF["X"]
-			sam.type_check(X,float,'Config: X')
-			sam.value_check(X,.0,'>','Config: X')
-			Y = mF["Y"]
-			sam.type_check(Y,float,'Config: Y')
-			sam.value_check(Y,.0,'>','Config: Y')
-			Z = mF["Z"]
-			sam.type_check(Z,float,'Config: Z')
-			sam.value_check(Z,.0,'>','Config: Z')
+		#mass
+		mass = self._configs["mass"]
+		sam.type_check(mass,sam.TYPES_numbers,'mass')
+		sam.value_check(mass,.0,'>','mass')
+		
+		#mass-fractions
+		mF = self._configs["mass_fractions"]
+		X = mF["X"]
+		sam.type_check(X,float,'Config: X')
+		sam.value_check(X,.0,'>','Config: X')
+		Y = mF["Y"]
+		sam.type_check(Y,float,'Config: Y')
+		sam.value_check(Y,.0,'>','Config: Y')
+		Z = mF["Z"]
+		sam.type_check(Z,float,'Config: Z')
+		sam.value_check(Z,.0,'>','Config: Z')
 
-			#effective_temperature
-			temp = self._configs["effective_temperature"]
-			sam.type_check(temp,sam.SAM_TYPES_numbers,'Config: effective_temperature')
-			sam.value_check(temp,.0,'>','Config: effective_temperature')
+		#effective_temperature
+		# temp = self._configs["effective_temperature"]
+		# sam.type_check(temp,sam.TYPES_numbers,'Config: effective_temperature')
+		# sam.value_check(temp,.0,'>','Config: effective_temperature')
 
-			#radii filename
-			rFilename = self._configs["radii_filename"]
-			sam.type_check(rFilename,str,'Config: radii_filename')
-			sam.path_check(rFilename)
+		#radii filename
+		# rFilename = self._configs["radii_filename"]
+		# sam.type_check(rFilename,str,'Config: radii_filename')
+		# sam.path_check(rFilename)
 
-			#average pressure
-			rho = self._configs["average_pressure"]
-			sam.type_check(rho,sam.SAM_TYPES_numbers,'Config: average_pressure')
-			sam.value_check(rho,.0,'>','Config: average_pressure')
+		#average pressure
+		# rho = self._configs["average_pressure"]
+		# sam.type_check(rho,sam.TYPES_numbers,'Config: average_pressure')
+		# sam.value_check(rho,.0,'>','Config: average_pressure')
 
 
 
