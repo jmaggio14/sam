@@ -10,12 +10,7 @@ def integrate(array,dx,culmative=True):
 
 
 def numerical_integration(iterate,terms,var,lam):
-	for value in iterate:
-		lam(  )
+	pass
+	# for value in iterate:
+	# 	lam(  )
 
-
-
-
-
-
-func = lambda d : d[""]

@@ -7,10 +7,6 @@ mass_fractions:
   Y : .28
   Z : .02
 
-# Kilograms / meter^3
-calculate_pressure: true
-average_pressure: 1410.
-
 # Meters
 radius:
   dr:  1.0e+3
@@ -18,4 +14,4 @@ radius:
 
 # check units of opacity
 opacity:
-  filename: "~/Modules/data/opacity.csv"
+  filename: "./opacity.txt"

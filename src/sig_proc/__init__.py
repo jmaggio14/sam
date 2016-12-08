@@ -6,5 +6,7 @@ from .statistics import  rms, \
 						snr
 from .integrate import integrate
 
+from .interpolate import interp2D
 
 #Classes
+from .Opacity import Opacity

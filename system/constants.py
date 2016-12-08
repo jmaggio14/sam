@@ -24,7 +24,7 @@ TYPES_math = (np.ndarray,int,float)
 TYPES_lists = (np.ndarray,list,tuple)
 TYPES_numbers = (int,float)
 TYPES_pythonLists = (list,tuple)
-TYPES_depths = (TYPE_8U,
+TYPES_depths =( TYPE_8U,
 				TYPE_8S, 
 				TYPE_16U,
 				TYPE_16S,
@@ -32,7 +32,20 @@ TYPES_depths = (TYPE_8U,
 				TYPE_32F,
 				TYPE_64F,
 				TYPE_64C,
-				TYPE_128C)
+				TYPE_128C )
+
+TYPES_intDepths = ( TYPE_8U,
+					TYPE_8S, 
+					TYPE_16U,
+					TYPE_16S,
+					TYPE_32S )
+
+TYPES_floatDepths = ( TYPE_32F, TYPE_64F )
+TYPES_complexDepths = ( TYPE_64C,TYPE_128C )
+ 
+
+### DATA PATH (ONLY WORKS ON CIS SERVERS)
+PATH_data = "~/src/python/data/examples"
 
 ######======= SOLAR ATTRIBUTES ======####
 
@@ -88,8 +101,23 @@ CONVERT_ev_to_j = 1.0 / CONVERT_j_to_ev
 
 ####======= UNIVERSAL CONSTANTS ========####
 
+#fractions
+CONSTANT_half    = 1.0 / 2.0
+CONSTANT_third   = 1.0 / 3.0
+CONSTANT_fourth  = 1.0 / 4.0
+CONSTANT_fifth   = 1.0 / 5.0
+CONSTANT_sixth   = 1.0 / 6.0
+CONSTANT_seventh = 1.0 / 7.0
+CONSTANT_eighth  = 1.0 / 8.0
+CONSTANT_ninth   = 1.0 / 7.0
+CONSTANT_tenth   = 1.0 / 10.0
+
 #pi
 CONSTANT_pi = np.pi #pi
+CONSTANT_2pi = 2.0 * CONSTANT_pi
+CONSTANT_4pi = 4.0 * CONSTANT_pi
+CONSTANT_16pi = 16.0 * CONSTANT_pi
+
 
 #e
 CONSTANT_e = np.e
@@ -152,3 +180,18 @@ CONSTANT_cnoConstant = 8.24e-31
 #Univeral gas constant {J * mol^-2 K^-1}
 CONSTANT_gasConstant = 8.214472
 CONSTANT_Rg = CONSTANT_gasConstant
+
+#Bound Free opacity constant
+CONSTANT_Abf = 4.34e21
+CONSTANT_boundFreeConstant = CONSTANT_Abf 
+
+#Free Free opacity constant
+CONSTANT_Aff = 3.68e18
+CONSTANT_freeFreeConstant = CONSTANT_Aff 
+
+#Free-free gaunt factor
+CONSTANT_gff = 1.0
+CONSTANT_gauntFactor = 1.0
+
+# Xcno constant
+CONSTANT_Xcno = 0.0141

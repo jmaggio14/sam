@@ -2,6 +2,7 @@
 import numpy as np
 import sys
 import os
+import traceback
 
 def debug(exception):
 	"""
@@ -14,23 +15,26 @@ def debug(exception):
 	exc_type, exc_obj, tb = sys.exc_info()
 	fname = os.path.split(tb.tb_frame.f_code.co_filename)[1]
 	line = tb.tb_lineno
-	
-	print("===============================================================") 		
-	print("\r\nfile: {0}\r\n\r\nline: {1} \r\n\r\n{2}\r\n".format(fname,line,exception))
+	traceback.print_tb(tb)
+	print("\r\n")
+	print("===============================================================") 	
+	print("                   | initital traceback | ")	
+	print("file: {0}\r\n\r\nline: {1} \r\n\r\ntype: {2}\r\n\r\n{3}\r\n".format(fname,line,exc_type,exception))
 	print("===============================================================")
 	raise SystemExit
 
 
 
-
-
 def type_check(var,types,varName="var"):
-        types = tuple(types) if isinstance(types,list) else types
+	types = tuple(types) if isinstance(types,list) else types
 	if isinstance(var,types) == False:
+		print("-----------------------------------------------------------")
 		print("-----------------------------------------------------------")
 		print("                       TYPE ERROR                       \n")
 		print("'{0}' must be one of the following types: {1}".format(varName,types))
 		print("\n-----------------------------------------------------------")
+		print("-----------------------------------------------------------\n")
+
 		raise TypeError
 
 def value_check(var,values,checkType,varName="var"):
@@ -41,9 +45,12 @@ def value_check(var,values,checkType,varName="var"):
 		"""
 		if var not in values:
 			print("-----------------------------------------------------------")
+			print("-----------------------------------------------------------")
 			print("                       VALUE ERROR                       \n")
 			print("'{0}' must be one of the following values {1}".format(varName,values))
 			print("\n-----------------------------------------------------------")
+			print("-----------------------------------------------------------\n")
+
 			raise ValueError
 	
 	elif checkType in ["forbidden","f"]:
@@ -53,10 +60,12 @@ def value_check(var,values,checkType,varName="var"):
 		"""
 		if var in values:
 			print("-----------------------------------------------------------")
+			print("-----------------------------------------------------------")
 			print("                       VALUE ERROR                       \n")
 			print("'{0}' must be cannot be one of the following values {1}".format(varName,values))
 			print("\n                                                          ")
 			print("\n-----------------------------------------------------------")
+			print("-----------------------------------------------------------\n")
 			raise ValueError
 	
 	elif checkType in ["boundary","b"]:
@@ -66,10 +75,13 @@ def value_check(var,values,checkType,varName="var"):
 		if values[0] == ":":
 			if var > values[1]:
 				print("-----------------------------------------------------------")
+				print("-----------------------------------------------------------")
 				print("                       VALUE ERROR                       \n")
 				print("'{0}' must larger than {1}".format(varName,values[0]))
 				print("\n                                                          ")
 				print("\n-----------------------------------------------------------")
+				print("-----------------------------------------------------------\n")
+
 				raise ValueError
 
 		elif values[1] == ":":
@@ -78,15 +90,17 @@ def value_check(var,values,checkType,varName="var"):
 				print("                       VALUE ERROR                       \n")
 				print("'{0}' must less than {1}".format(varName,values[1]))
 				print("\n                                                          ")
-				print("\n-----------------------------------------------------------")
+				print("\n-----------------------------------------------------------\n")
 				raise ValueError
 		else:
 			if var > values[1] or var < values[0]:
+				print("-----------------------------------------------------------")
 				print("-----------------------------------------------------------")
 				print("                       VALUE ERROR                       \n")
 				print("'{0}' must be in range {1}".format(varName,values))
 				print("\n                                                          ")
 				print("\n-----------------------------------------------------------")
+				print("-----------------------------------------------------------\n")
 				raise ValueError
 
 	elif checkType in ["greater than","greater",">","g"]:
@@ -96,30 +110,39 @@ def value_check(var,values,checkType,varName="var"):
 		values = values[0] if type(values) in (tuple,list) else values
 		if var < values:
 			print("-----------------------------------------------------------")
+			print("-----------------------------------------------------------")
 			print("                       VALUE ERROR                       \n")
 			print("'{0}' must be greater than {1}".format(varName,values))
 			print("\n                                                          ")
 			print("\n-----------------------------------------------------------")
+			print("-----------------------------------------------------------\n")
+
 			raise ValueError
 
 	elif checkType in ["less than","less","<",'l']:
 		values = values[0] if type(values) in (tuple,list) else values
 		if var > values:
 			print("-----------------------------------------------------------")
+			print("-----------------------------------------------------------")
 			print("                       VALUE ERROR                       \n")
 			print("'{0}' must be less than {1}".format(varName,values))
 			print("\n                                                          ")
 			print("\n-----------------------------------------------------------")
+			print("-----------------------------------------------------------\n")
+
 			raise ValueError
 
 
 	elif checkType in ["equals","e","="]:
 		if var != values:
 			print("-----------------------------------------------------------")
+			print("-----------------------------------------------------------")
 			print("                       VALUE ERROR                       \n")
 			print("'{0}' must be equal to {1}".format(varName,values))
 			print("\n                                                          ")
 			print("\n-----------------------------------------------------------")
+			print("-----------------------------------------------------------\n")
+
 			raise ValueError			
 
 def path_check(path):
