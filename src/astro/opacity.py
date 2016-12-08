@@ -19,15 +19,17 @@ def opacity(otype="bf", rho=None, T=None, X=None, Z=None, t=None, g=1.0):
 	except Exception as e:
 		sam.debug(e)
 
-def bound_free_opacity(rho,T,X,Z,t,g):
+def bound_free_opacity(rho,T,X,Z,t,g=1):
 	units = "[m^2/kg]"
-	k_bf = (4.34e21 * (g/t) * Z * (1 + X) * rho) / T**3.5
-	
+
+	if t == None:
+		 t = 2.82 * ( rho * (1 + X) )**.2
+	k_bf = sam.CONSTANT_Abf * (g/t) * Z * (1 + X) * (rho / T**3.5)
 	return k_bf,units
 
 def free_free_opacity(rho,T,X,Z,t,g):
 	units = "[m^2/kg]"
-	k_ff = (3.68e18 * g * (1-Z) * (1+X) * rho) / T**3.5 
+	k_ff = (sam.CONSTANT_Aff * g * (1-Z) * (1+X) * rho) / T**3.5 
 
 	return k_ff,units
 
