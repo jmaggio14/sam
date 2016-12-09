@@ -112,15 +112,15 @@ class Opacity(object):
 
 if __name__ == "__main__":
 	OP = Opacity('../../opacity.txt',80,7)
-	print(OP._rho.size,OP._T.size)
+	print(OP._logR.size,OP._logT.size)
 
 
 	print(OP.value( 1e3,3e4 ) )
 	print(OP.value( 1e-2,4.3e5) )
 
 	
-	rhoStack = np.vstack(( OP._rho, OP._opacity ) )
-	Tcols = np.vstack( ([0], OP._T.reshape( (OP._T.size,1) )) )
-	fullStack = np.hstack(  (Tcols,rhoStack) )
+	Rstack = np.vstack(( OP._logR, OP._opacity ) )
+	Tcols = np.vstack( ([0], OP._logT.reshape( (OP._logT.size,1) )) )
+	fullStack = np.hstack(  (Tcols,Rstack) )
 	np.savetxt('interpolated_opacity.txt',fullStack)
 
