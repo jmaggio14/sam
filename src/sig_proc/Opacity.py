@@ -22,15 +22,15 @@ EXAMPLE::
 
 	#create Opacity object instance
 	>>> OP = Opacity(filename='opacity.txt',rows=100,cols=100) 	# interpolates opacity table to 100x100 grid
-																# rho is indexed along columns
-																# T is indexed along rows 
-																# more rows & cols --> more resolution
+									# rho is indexed along columns
+									# T is indexed along rows 
+									# more rows & cols --> more resolution
 
 	#retrieve opacity value for any given rho & T
 	>>> opacityValue = OP.value( rho=1e5, T=1e5)  # returns closest opacity value in table for rho = 1e5,T=1e5
-												  # does scale for logs
-												  # does convert values to mkg
-												  # does scale for T_6
+							  # does scale for logs
+							  # does convert values to mkg
+							  # does scale for T_6
 
 """
 
