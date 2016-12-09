@@ -1,6 +1,9 @@
 """
 
 NOTES::
+
+	OPACITY DATA MUST BE IN SAME FORMAT AS EXAMPLE FILE in sam/src/sig_proc/opacity_data_example.txt
+	
 	-as of now:
 		does scale for logs
 		does convert values to mkg
