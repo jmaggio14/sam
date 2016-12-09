@@ -1,4 +1,18 @@
 """
+
+NOTES::
+	-as of now:
+		does scale for logs
+		does convert values to mkg
+		does scale for T_6
+
+	-if anyone can check my math in the 'value()' method, that would be dandy.
+
+	-example for how to use it is below
+
+	-Feel free to email me at jxm9264@rit.edu or contact me via facebook: https://www.facebook.com/jeff.a.maggio
+	
+
 PURPOSE:: Generates system to easily retrieve opacity values
 
 EXAMPLE::
@@ -13,7 +27,7 @@ EXAMPLE::
 	>>> opacityValue = OP.value( rho=1e5, T=1e5)  # returns closest opacity value in table for rho = 1e5,T=1e5
 												  # does scale for logs
 												  # does convert values to mkg
-												  # does NOT scale for T_6
+												  # does scale for T_6
 
 """
 
@@ -24,13 +38,15 @@ from scipy import interpolate
 class Opacity(object):
 
 	def __init__(self,filename,rows=1e2,cols=1e2):
+		#Retrieves raw opacity data
 		output = self.load_opacity(filename)
 		rawOpacity = output[0]
 
 		r,c = rawOpacity.shape
 		x = np.arange(c)
 		y = np.arange(r)
-
+		
+		#interpolates the logR and logT
 		interp = interpolate.interp2d(x,y,rawOpacity)
 		newX = np.arange(0,x.size,x.size/cols)
 		newY = np.arange(0,y.size,y.size/rows)
