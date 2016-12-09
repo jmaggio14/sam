@@ -95,7 +95,7 @@ class Opacity(object):
 
 
 	def value(self,rho,T):
-		#calculates logR and T --> also *should* convert units properly
+		#calculates logR and logT --> also *should* convert units properly
 		logR = np.log10(  (rho * 1e-3)/(1e-18 * T**3)  )
 		logT = np.log10(T)
 		logR_index = self.closest_index(logR,self._logR)
