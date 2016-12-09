@@ -27,11 +27,14 @@ EXAMPLE::
 									# more rows & cols --> more resolution
 
 	#retrieve opacity value for any given rho & T
-	>>> opacityValue = OP.value( rho=1e5, T=1e5)  # returns closest opacity value in table for rho = 1e5,T=1e5
-							  # does scale for logs
-							  # does convert values to mkg
-							  # does scale for T_6
-
+	>>> opacityValue1 = OP.value( rho=1e5, T=1e5)  
+	
+	>>> opacityValue2 = OP.value( rho=1.2e5, T=1.2e5)  
+		#repeat with N opacityValues
+		# returns closest opacity value in table for rho,T
+	 	# does scale for logs
+	  	# does convert values to mkg
+		# does scale for T_6
 """
 
 import numpy as np
