@@ -2,7 +2,7 @@
 
 NOTES::
 
-	OPACITY DATA MUST BE IN SAME FORMAT AS EXAMPLE FILE in sam/src/sig_proc/opacity_data_example.txt
+	input data must be in this format: https://github.com/jmaggio14/sam/blob/master/src/sig_proc/opacity_data_example.txt
 	
 	-as of now:
 		does scale for logs
