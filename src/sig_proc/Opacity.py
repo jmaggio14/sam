@@ -95,11 +95,12 @@ class Opacity(object):
 
 
 	def value(self,rho,T):
+		#calculates logR and T --> also *should* convert units properly
 		logR = np.log10(  (rho * 1e-3)/(1e-18 * T**3)  )
 		logT = np.log10(T)
 		logR_index = self.closest_index(logR,self._logR)
 		logT_index = self.closest_index(logT,self._logT)
-
+		#de-logs the retrieved value and *should* convert to mkg
 		opacity_value = 10**self._opacity[ logT_index, logR_index ] * .1
 		return opacity_value 
 
