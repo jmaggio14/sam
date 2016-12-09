@@ -46,23 +46,25 @@ class Opacity(object):
 		x = np.arange(c)
 		y = np.arange(r)
 		
-		#interpolates the logR and logT
+		#interpolates the opacity table to specified rows/cols
 		interp = interpolate.interp2d(x,y,rawOpacity)
 		newX = np.arange(0,x.size,x.size/cols)
 		newY = np.arange(0,y.size,y.size/rows)
 		self._opacity = interp( newX,newY )
 
+		#interpolates logR and logT to the same range as opacity table
 		self._logR = output[1]
 		self._logT = output[2]
-
 		self._logR = self.interp1( newX.size,self._logR )
 		self._logT = self.interp1( newY.size,self._logT )
 
 
 	def convert_units(self,array):
+		#THIS METHOD IS NO LONGER USED
 		converted = array * 1e3
 		return converted
-
+	
+	
 	def load_opacity(self,filename):
 		#retrieving opacity values
 		opacity = np.genfromtxt(filename)
@@ -77,11 +79,13 @@ class Opacity(object):
 
 
 	def remove_log(self,array,base=10):
+		#THIS FUNCTION IS NO LONGER USED
 		unLogged =  base**array
 		return unLogged
 
 
 	def closest_index(self,value,x):
+		#Retrieves closest index to input value
 		absoluteDifference = np.abs(value - x)
 		closest = np.argmin(absoluteDifference)
 		return closest
