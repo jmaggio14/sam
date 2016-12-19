@@ -72,7 +72,7 @@ def wiens_temp(peak):
 	temp = (2897.7729) / peak
 	return temp
 
-def blackbody_fit(wavelengths,emissivity,tempRange=(100,6500),step=5,rtype="dict",autoDebug=True):
+def blackbody_fit(wavelengths,emissivity,tempRange=(100,6500),step=5,rtype="dict",autoDebug=False):
 	#Error Checking
 	if autoDebug == True:
 		sam.type_check(wavelengths,np.ndarray,'wavelengths')
@@ -96,12 +96,12 @@ def blackbody_fit(wavelengths,emissivity,tempRange=(100,6500),step=5,rtype="dict
 
 		RMS = np.zeros(len(tempRange))
 		for index,temp in enumerate(tempRange):
-			bb = sam.blackbody(T=temp, ranges=wavelengths, normalize=True)
-			rms = sam.rms2(bb,emissivity)
+			bb = sam.astro.blackbody(T=temp, ranges=wavelengths, normalize=True)
+			rms = sam.sig_proc.rms2(bb,emissivity)
 			RMS[index] = rms
 
 		bestFitTemp= tempRange[ np.argmin(RMS) ]
-		bestBlackbody = sam.blackbody(T=bestFitTemp,ranges=wavelengths)
+		bestBlackbody = sam.astro.blackbody(T=bestFitTemp,ranges=wavelengths)
 
 
 		if rtype in [0,"tuple","t","list"]:
@@ -159,13 +159,24 @@ def blackbody_errorcheck(T, ranges, step, verbose, filename):
 
 
 if __name__ == "__main__":
-	plot = blackbody(T=3660,verbose = True)[1]
-	peak = wiens_peak(3660)
-	temp = wiens_temp(peak)
-	plot.show()
+	import time	
+	startTime = time.time()	
+	dataFiles = ["../../data/Dark_spectrum.txt","../../data/Known_spectrum.txt","../../data/Tungsten_spectrum.txt"]
+	saveNames = ["../../output/Blackbody/Dark_plot.pdf","../../output/Blackbody/Known_plot.pdf","../../output/Blackbody/Tungsten_plot.pdf"]
 
-
-
-
-
-
+	for fileIndex,file in enumerate(dataFiles):
+		source = sam.retrieve_structured_data(filename=file)
+		source["wavelengths"] = source["wavelengths"] * 1e-3 #converting to microns
+		wavelengths, emissivity, bestBlackbody, RMS, bestFitTemp = blackbody_fit(source["wavelengths"],source["emissivity"],rtype="tuple")
+		peakLambda = sam.astro.wiens_peak(bestFitTemp)
+		plot = sam.sig_proc.quickplot(filename=saveNames[fileIndex],
+							values=( (wavelengths,emissivity),(wavelengths,bestBlackbody) ), 
+							colors=('r','g'), 
+							labels=("blackbody approximation at {0}".format(bestFitTemp),file),
+							yLimits=(0,1.2),
+							xLimits=(.3,1.05),
+							verticalMarkers=(peakLambda,),
+							save=False,
+							display=False,
+							clearFig = True )
+		# plot.errorbar(wavelengths,bestBlackbody,yerr=RMS,uplims=True)

@@ -33,7 +33,7 @@ from .stellar_attributes import mean_molecular_weight,\
 								density
 
 
-
+from .stellar_boundaries import boundaries
 
 #Classes
 from .Star import Star

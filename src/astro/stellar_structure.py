@@ -7,7 +7,7 @@ def mass_gradient(r,rho,autoDebug=True):
 		sam.type_check(r,sam.TYPES_numbers,'r')
 		sam.type_check(rho,sam.TYPES_numbers,'rho')
 
-	dMdr = sam.CONSTANT_4pi * r**2 * rho
+	dMdr = 4 * np.pi * r**2 * rho
 	return dMdr
 
 def pressure_gradient(r,rho,Mr,autoDebug=True):
@@ -41,18 +41,16 @@ def temperature_gradient_radiation(r,rho,kappa,T,Lr,autoDebug=True):
 	return radiationGrad
 
 
-def temperature_gradient_adiabatic(r,Mr,mu,autoDebug=True):
+def temperature_gradient_adiabatic(r,gamma,mu,Mr,autoDebug=True):
 	if autoDebug:
 		sam.type_check(r,sam.TYPES_numbers,'gamma')
 		sam.type_check(mu,sam.TYPES_numbers,'mu')
 		sam.type_check(Mr,sam.TYPES_numbers,'Mr')
-
-	g = (sam.CONSTANT_G * Mr) / r**2
-	nR = ( sam.CONSTANT_k / (mu * sam.CONSTANT_mh) )
-	Cv = 1.5 * nR
-	Cp = Cv + nR
-	adiabaticGrad = -g / Cp
-
+	mh =sam.CONSTANT_mh
+	k = sam.CONSTANT_k
+	G = sam.CONSTANT_G
+	
+	adiabaticGrad = -1 * (1 - 1/gamma) * (mu * mh)/k * (G * Mr)/(r**2)
 	return adiabaticGrad
 
 

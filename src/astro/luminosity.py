@@ -20,5 +20,5 @@ def luminosity(r,T,autoDebug=True):
 		sam.value_check(T,.0,">","T")
 	#-----------END ERROR CHECKING----------
 
-	L = 4 * sam.CONSTANT_pi * r**2 * sam.CONSTANT_k * T**4
+	L = 4 * sam.CONSTANT_pi * r**2 * sam.CONSTANT_SB* T**4
 	return L

@@ -1,17 +1,30 @@
-# Kilograms
-mass : 1.9891e+30
+# Mass of Star -- Kilograms
+Ms : 1.9891e+30
 
-# fractions (out of 1)
+# Mass Fractions -- probability out of 1
 mass_fractions:
-  X : .7
+  X : .70
   Y : .28
   Z : .02
 
-# Meters
+# Radius -- Meters
 radius:
-  dr:  1.0e+3
-  total: 7.0e+8
+  dr:  1.0e+5
+  Rs: 6.957e+8
 
-# check units of opacity
+#effective temperature -- Kelvin
+Teff: 5777
+
+# Opacity -- String
 opacity:
   filename: "./opacity.txt"
+
+#stopping critera for detecting the core
+## default values here are
+stopping_critera:
+  M_min: .01 #fraction of Ms
+  L_min: .1 #fraction of Ls
+  R_min: .02 #fraction of Rs
+
+# default assumes monotomic where gamma = 5/3
+gamma: 1.6666666667
