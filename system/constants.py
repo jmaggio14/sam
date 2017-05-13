@@ -78,8 +78,6 @@ CONVERT_s_to_yr = CONVERT_second_to_year
 CONVERT_year_to_second = 1 / CONVERT_second_to_year
 CONVERT_yr_to_s = CONVERT_year_to_second
 
-
-
 #-----DISTANCES-----#
 CONVERT_parsec_to_meter = 3.0856776e16
 CONVERT_meter_to_parsec = 1.0 / CONVERT_parsec_to_meter
@@ -98,24 +96,22 @@ CONVERT_m_to_au = 6.68459e-12
 CONVERT_au_to_m = 1.0 / CONVERT_m_to_au
 
 CONVERT_nm_to_m = 1e-9
-CONVERT_nm_to_m = 1.0 / CONVERT_nm_to_m
+CONVERT_m_to_nm = 1.0 / CONVERT_nm_to_m
 
 CONVERT_um_to_m = 1e-6
-CONVERT_um_to_m = 1.0 / CONVERT_um_to_m
+CONVERT_m_to_um = 1.0 / CONVERT_um_to_m
 
 CONVERT_cm_to_m = 1e-2
 CONVERT_m_to_cm = 1.0 / CONVERT_cm_to_m
 
 CONVERT_A_to_m = 1e-10
-CONVERT_A_to_m = 1.0 / CONVERT_A_to_m
+CONVERT_m_to_A = 1.0 / CONVERT_A_to_m
 
 
 
 #-----ENERGY-----#
 CONVERT_j_to_ev = 6.242e+18
 CONVERT_ev_to_j = 1.0 / CONVERT_j_to_ev
-
-
 
 
 

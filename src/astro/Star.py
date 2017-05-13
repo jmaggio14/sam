@@ -174,7 +174,6 @@ class Star(object):
 				#temperature gradient
 
 				adiabatic = True
-				#MUST FIGURE OUT WAY TO DETERMINE THIS
 				if adiabatic:
 					self._tGrad.append(  sam.astro.temperature_gradient_adiabatic(r,self._gamma,self._mu,Mr)  ) #should this be internal mass?
 					Tr = lastT - (self._tGrad[-1] * self._dr)

@@ -106,6 +106,8 @@ def value_check(var,values,checkType,varName="var"):
 	elif checkType in ["greater than","greater",">","g"]:
 		"""
 		Greater than -- checks to see if the 'var' is greater than 'values'
+
+		raises ValueError if var less than values
 		"""
 		values = values[0] if type(values) in (tuple,list) else values
 		if var < values:

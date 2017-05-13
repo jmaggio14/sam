@@ -11,7 +11,7 @@ from .data_retrieval import retrieve_data,\
 							retrieve_structured_data, \
 							retrieve_non_structured_data
 
-from .clear import clear
+from .system import clear,ls\
 
 #Classes
 from .Config import Config
